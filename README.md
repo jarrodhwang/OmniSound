@@ -67,3 +67,7 @@ Use Visual Studio 2026 C++/CMake and PowerShell 7. The scripts restore pinned to
 | `build/driver/Release/OmniSoundAudio.sys` | Unsigned development driver |
 
 [Pro signing and release steps](docs/PRO_RELEASE.md), [validation](docs/VALIDATION.md), [architecture and quality](docs/ARCHITECTURE.md), [audio diagnostics](docs/AUDIO_QUALITY.md).
+
+## Licensing
+
+OmniSound is open source. Original project code, assets, and documentation are licensed under MIT. The `driver/` tree, including Microsoft SysVAD-derived code, is licensed under the Microsoft Public License (MS-PL). Other third-party components retain their own licenses. See [LICENSE](LICENSE), [license scope](LICENSES.md), and [third-party notices](THIRD_PARTY_NOTICES.md).

@@ -99,7 +99,7 @@ public static class OmniSoundWindowProbe {
         if (!$visualSmoke.WaitForExit(20000)) { Stop-Process -Id $visualSmoke.Id -Force; throw 'UI snapshot timed out.' }
         if ($visualSmoke.ExitCode -ne 0) { throw "UI snapshot failed ($($visualSmoke.ExitCode))." }
         Write-Output 'WinUI Lite system/light/dark/narrow and Pro five-language layout snapshots captured.'
-        foreach ($document in @('LICENSE','THIRD_PARTY_NOTICES.md')) {
+        foreach ($document in @('LICENSE','LICENSES.md','THIRD_PARTY_NOTICES.md')) {
             Copy-Item -LiteralPath (Join-Path $root $document) -Destination $smoke -Force
         }
         $snapshots = Join-Path $root 'build\validation\setup'

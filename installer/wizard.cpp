@@ -159,7 +159,8 @@ class Wizard
             label(L"설치 전에 포함된 사용권 문서를 확인하세요.", 108, 35);
             editor_ = control(
                 L"EDIT",
-                document(executable_dir() / L"LICENSE") + L"\r\n\r\n— THIRD-PARTY NOTICES —\r\n\r\n" +
+                document(executable_dir() / L"LICENSE") + L"\r\n\r\n— LICENSE SCOPE —\r\n\r\n" +
+                    document(executable_dir() / L"LICENSES.md") + L"\r\n\r\n— THIRD-PARTY NOTICES —\r\n\r\n" +
                     document(executable_dir() / L"THIRD_PARTY_NOTICES.md"),
                 ES_MULTILINE | ES_READONLY | ES_AUTOVSCROLL | WS_VSCROLL | WS_TABSTOP, 250, 156, 555, 296);
             agreement_ = control(L"BUTTON", L"위 사용권 및 제3자 고지를 확인하고 동의합니다.",

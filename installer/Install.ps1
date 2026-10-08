@@ -162,8 +162,8 @@ if ($Uninstall) {
     Remove-Item -LiteralPath $uninstallKey -ErrorAction SilentlyContinue
     Remove-Item -LiteralPath $shortcut -ErrorAction SilentlyContinue
     # Delete only the installed file manifest. Configuration and measurements are retained.
-    $removeFiles = $binaries + $supportFiles + $uiResources + @('LICENSE','THIRD_PARTY_NOTICES.md','README.md','Agreement.txt','licenses\WindowsAppSDK-License.txt','licenses\nlohmann-json-MIT.txt','licenses\InnoSetup-License.txt','install.mode')
-    if (!$lite) { $removeFiles += $driverFiles + @('licenses\SysVAD-MIT.txt','licenses\OmniSoundLocalTest.cer') }
+    $removeFiles = $binaries + $supportFiles + $uiResources + @('LICENSE','LICENSES.md','THIRD_PARTY_NOTICES.md','README.md','README.ko.md','Agreement.txt','licenses\WindowsAppSDK-License.txt','licenses\nlohmann-json-MIT.txt','licenses\InnoSetup-License.txt','install.mode')
+    if (!$lite) { $removeFiles += $driverFiles + @('licenses\SysVAD-MS-PL.txt','licenses\SysVAD-MIT.txt','licenses\OmniSoundLocalTest.cer') }
     foreach ($name in $removeFiles) {
         $path = [IO.Path]::GetFullPath((Join-Path $target $name))
         if (!$path.StartsWith($target + '\',[StringComparison]::OrdinalIgnoreCase)) { throw 'Uninstall path escaped installation directory.' }
@@ -225,8 +225,8 @@ $runtimeSignature = Get-AuthenticodeSignature -LiteralPath $runtimeInstaller
 if ($runtimeSignature.Status -ne 'Valid' -or $runtimeSignature.SignerCertificate.Subject -notmatch '^CN=Microsoft Corporation,') {
     throw 'Microsoft Windows App Runtime installer has an invalid signature.'
 }
-$requiredDocs = @('LICENSE','THIRD_PARTY_NOTICES.md','README.md','licenses\WindowsAppSDK-License.txt','licenses\nlohmann-json-MIT.txt')
-if (!$lite) { $requiredDocs += 'licenses\SysVAD-MIT.txt' }
+$requiredDocs = @('LICENSE','LICENSES.md','THIRD_PARTY_NOTICES.md','README.md','README.ko.md','licenses\WindowsAppSDK-License.txt','licenses\nlohmann-json-MIT.txt')
+if (!$lite) { $requiredDocs += 'licenses\SysVAD-MS-PL.txt' }
 foreach ($name in $requiredDocs) {
     if (!(Test-Path -LiteralPath (Join-Path $Source $name))) { throw "Package file is missing: $name" }
 }
@@ -289,14 +289,15 @@ else {
     Assert-NoReparse $target
 }
 $wasInstalled = if ($lite) { Test-Path -LiteralPath (Join-Path $target 'OmniSound.exe') } else { Test-Path -LiteralPath (Join-Path $target 'OmniSoundService.exe') }
-$docs = @('LICENSE','THIRD_PARTY_NOTICES.md','README.md','licenses\WindowsAppSDK-License.txt','licenses\nlohmann-json-MIT.txt')
+$docs = @('LICENSE','LICENSES.md','THIRD_PARTY_NOTICES.md','README.md','README.ko.md','licenses\WindowsAppSDK-License.txt','licenses\nlohmann-json-MIT.txt')
 foreach ($optional in @('Agreement.txt','licenses\InnoSetup-License.txt')) {
     if (Test-Path -LiteralPath (Join-Path $Source $optional)) { $docs += $optional }
 }
-if (!$lite) { $docs += 'licenses\SysVAD-MIT.txt' }
+if (!$lite) { $docs += 'licenses\SysVAD-MS-PL.txt' }
 if ($LocalTest -and !$lite) { $docs += 'licenses\OmniSoundLocalTest.cer' }
 $managedFiles = $binaries + $supportFiles + $uiResources + $docs + @('install.mode')
-if (!$lite) { $managedFiles += $driverFiles }
+# Back up the old, incorrectly named SysVAD license file so a failed update can restore it.
+if (!$lite) { $managedFiles += $driverFiles + @('licenses\SysVAD-MIT.txt') }
 $previousFiles = @()
 $previousTask = if (Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue) { Export-ScheduledTask -TaskName $taskName } else { $null }
 $previousRun = (Get-ItemProperty -LiteralPath $runKey -ErrorAction SilentlyContinue).$taskName
@@ -345,6 +346,8 @@ if ($previousShortcut) { Copy-IfDifferent $shortcut (Join-Path $backup 'start-me
         foreach ($name in $driverFiles) { Copy-IfDifferent (Join-Path $Source $name) (Join-Path $target $name) }
     }
     foreach ($name in $docs) { Copy-IfDifferent (Join-Path $Source $name) (Join-Path $target $name) }
+    # Remove the obsolete filename after the new license documents are installed.
+    if (!$lite) { Remove-Item -LiteralPath (Join-Path $target 'licenses\SysVAD-MIT.txt') -Force -ErrorAction SilentlyContinue }
     [IO.File]::WriteAllText((Join-Path $target 'install.mode'),$Mode,[Text.UTF8Encoding]::new($false))
     Write-Output 'OMNISOUND_PHASE|85|시작 메뉴와 백그라운드 실행을 구성하는 중'
     if (!$lite) {

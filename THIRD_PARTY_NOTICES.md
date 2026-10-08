@@ -1,8 +1,10 @@
 # Third-party components
 
-## Microsoft SysVAD — MIT
+## Microsoft SysVAD — Microsoft Public License (MS-PL)
 
 Vendored source: `driver/sysvad/`. Copyright Microsoft Corporation. License: `driver/sysvad/LICENSE`.
+
+The entire `driver/` tree, including OmniSound's endpoint tables, INF, and driver-specific changes, is distributed under MS-PL. The MS-PL is an open-source license; retain its terms for source distributions. See `LICENSES.md` for the repository's license scope.
 
 Origin: https://github.com/microsoft/Windows-driver-samples/tree/2dc3fd3a0cc84a2933f2194e7ec0871584979071/audio/sysvad
 

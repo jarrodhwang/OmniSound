@@ -55,9 +55,9 @@ Copy-Item -LiteralPath $runtimeInstaller -Destination (Join-Path $destination 'p
 if (!$LiteOnly) {
     foreach ($name in @('OmniSound.inf','OmniSoundAudio.sys','OmniSound.cat')) { Copy-Item -LiteralPath (Join-Path $driver $name) -Destination (Join-Path $destination 'driver') }
 }
-foreach ($name in @('README.md','README.ko.md','LICENSE','THIRD_PARTY_NOTICES.md')) { Copy-Item -LiteralPath (Join-Path $root $name) -Destination $destination }
+foreach ($name in @('README.md','README.ko.md','LICENSE','LICENSES.md','THIRD_PARTY_NOTICES.md')) { Copy-Item -LiteralPath (Join-Path $root $name) -Destination $destination }
 Copy-Item -LiteralPath (Join-Path $root 'tools\cache\nuget\microsoft.windowsappsdk.runtime\1.8.260804001\license.txt') -Destination (Join-Path $destination 'licenses\WindowsAppSDK-License.txt')
-if (!$LiteOnly) { Copy-Item -LiteralPath (Join-Path $root 'driver\sysvad\LICENSE') -Destination (Join-Path $destination 'licenses\SysVAD-MIT.txt') }
+if (!$LiteOnly) { Copy-Item -LiteralPath (Join-Path $root 'driver\sysvad\LICENSE') -Destination (Join-Path $destination 'licenses\SysVAD-MS-PL.txt') }
 Copy-Item -LiteralPath (Join-Path $root 'third_party\nlohmann\LICENSE.MIT') -Destination (Join-Path $destination 'licenses\nlohmann-json-MIT.txt')
 Copy-Item -LiteralPath (Join-Path $root 'installer\Agreement.txt') -Destination (Join-Path $destination 'Agreement.txt')
 $innoLicense = Join-Path $PSScriptRoot 'cache\inno\7.1.0\compiler\license.txt'

@@ -103,3 +103,7 @@ Visual Studio 2026 C++/CMake와 PowerShell 7을 사용합니다. 고정 버전 �
 
 [Pro signing and release steps](docs/PRO_RELEASE.md), [validation](docs/VALIDATION.md),
 [architecture/quality](docs/ARCHITECTURE.md), [audio diagnostics](docs/AUDIO_QUALITY.md).
+
+## 라이선스
+
+OmniSound는 오픈소스입니다. 프로젝트에서 작성한 원본 코드·에셋·문서는 MIT 라이선스를 따릅니다. Microsoft SysVAD 기반 코드를 포함한 `driver/` 전체는 Microsoft Public License(MS-PL)를 따릅니다. 다른 서드파티 구성 요소는 각자의 라이선스를 유지합니다. 자세한 내용은 [LICENSE](LICENSE), [라이선스 범위](LICENSES.md), [서드파티 고지](THIRD_PARTY_NOTICES.md)를 참고하세요.
