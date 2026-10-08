@@ -1,78 +1,44 @@
 # OmniSound 0.2
 
-[![Download the latest release](https://img.shields.io/badge/Download-Latest%20release-2ea44f?style=for-the-badge&logo=windows)](../../releases/latest/download/OmniSound-Setup.exe) · [Previous versions / 이전 버전 보기](../../releases)
+[![Download the latest release](https://img.shields.io/badge/Download-Latest%20release-2ea44f?style=for-the-badge&logo=windows)](https://github.com/jarrodhwang/OmniSound/releases/latest/download/OmniSound-Setup.exe) · [Previous versions](https://github.com/jarrodhwang/OmniSound/releases)
 
-C++20 · WinUI 3 · Windows 11 x64 다중 오디오 출력.
+[English](README.md) · [한국어](README.ko.md)
 
-| 에디션 | 사용 방식 |
+C++20 · WinUI 3 · Multi-output audio for Windows 11 x64.
+
+| Edition | How it works |
 | --- | --- |
-| **Lite** | Windows 기본 출력을 선택한 다른 장치로 복제. 드라이버·관리자 권한 없이 현재 사용자에게 설치. 저장 그룹 중 하나만 활성화. |
-| **Pro** | `OmniSound · 그룹 이름` 가상 출력을 Windows에서 선택. 그룹별 독립 오디오, 스피커 위치, 스테레오 및 5.1/7.1 PCM 라우팅. 서명된 드라이버와 관리 서비스 필요. |
+| **Lite** | Mirrors Windows' default output to selected devices. Installs for the current user without a driver or administrator privileges. Only one saved group can be active. |
+| **Pro** | Select a virtual `OmniSound · group name` output in Windows. Provides independent audio per group, speaker positioning, and stereo or 5.1/7.1 PCM routing. Requires a signed driver and a privileged service. |
 
-`dist/OmniSound-Setup.exe`는 로컬 개발 설치 파일입니다. 현재 표준 개발 설치 파일에서는
-Lite만 설치할 수 있으며 Pro 선택 항목과 무인 Pro 설치가 비활성화되어 있습니다. Pro는
-Microsoft 서명 드라이버와 게시자 서명이 적용된 릴리스 패키지가 준비되면 활성화됩니다.
-Lite는 정상 Windows 보안 설정을 유지하며 설치할 수 있습니다. Pro의 가상 출력 드라이버를 이 PC에서 무료로 시험하려면
-별도의 로컬 테스트 패키지와 Windows 테스트 모드가 필요합니다. 테스트 모드는 Secure Boot를
-끄고 재부팅해야 하므로 일반 PC에서 보안 설정을 바꾸고 싶지 않다면 Lite를 사용하세요.
-Pro를 일반 Windows 설치처럼 배포하려면 Microsoft 서명이 필요합니다. 무료 로컬 테스트와
-되돌리기 절차는 [Pro 서명 및 설치 안내](docs/PRO_RELEASE.md)를 참고하세요. 빌드 성공은
-실제 가상 출력·음향 동기화·정식 인증 완료를 의미하지 않습니다.
+`dist/OmniSound-Setup.exe` is a local development installer. The standard development installer currently supports Lite only; the Pro selection and unattended Pro installation are disabled. Pro will be enabled when a release package with a Microsoft-signed driver and publisher-signed application is ready. Lite installs with normal Windows security settings. Testing the Pro virtual output driver locally requires a separate test package and Windows test mode. Test mode requires disabling Secure Boot and restarting, so use Lite if you do not want to change your PC's security settings. Microsoft signing is required to distribute Pro like a regular Windows application. See [Pro signing and installation](docs/PRO_RELEASE.md) for local testing and rollback steps. A successful build does not confirm that virtual output, audio synchronization, or formal certification has passed.
 
-## 설치와 사용
+## Installation and use
 
-1. `OmniSound-Setup.exe` 실행 → Lite 선택 → 사용권 동의 → 설치 위치 → 설치. Pro는 서명된
-   정식 릴리스가 준비될 때까지 표준 개발 설치 프로그램에서 비활성화되어 있습니다.
-2. 그룹을 추가하고 출력 장치의 왼쪽 체크박스를 켠 뒤 저장합니다. 행이나 이름을
-   클릭하면 개별 설정만 선택됩니다. 사용 불가 장치는 **장치 더보기**로 확인합니다.
-3. Lite는 Windows 기본 출력을 유지합니다. Pro는 Windows 소리 출력 또는 앱별
-   출력에서 가상 그룹을 선택합니다. 소스가 다른 그룹으로 바뀌면 그 그룹이 재생됩니다.
-4. **모든 출력 장치 볼륨 동기화**는 Lite의 기본 출력 또는 Pro의 가상 그룹과 각
-   Windows 장치의 퍼센트를 맞춥니다. 50%를 두 번 곱하지 않습니다. 해당 실제 장치를
-   사용하는 다른 앱의 볼륨에도 적용됩니다.
-5. Pro의 **스피커 배치와 라우팅**에서 스테레오, 좌우 교환, 모노, 단일 채널 또는
-   스피커 위치를 선택합니다. 마커를 끌면 위치 라우팅으로 전환됩니다. 5.1/7.1은
-   Windows의 가상 그룹 스피커 구성과 소스 앱에서 해당 채널을 활성화해야 합니다.
-6. PC 내장/USB 마이크를 청취 위치에 고정하고 **자동 보정**을 실행합니다. 녹음은
-   저장하지 않습니다. 수동 추가 지연은 0~2000ms입니다. 헤드폰이나 Bluetooth 통화
-   마이크는 자동 측정에 적합하지 않을 수 있습니다.
+1. Run `OmniSound-Setup.exe` → choose Lite → accept the license → choose an install location → install. Pro is disabled in the standard development installer until a signed release is ready.
+2. Add a group, check the box to the left of each output device, and save. Clicking a row or name only selects its settings. Find unavailable devices under **Show more devices**.
+3. Lite keeps Windows' default output. With Pro, select a virtual group in Windows sound settings or an app's output settings. Audio plays through the group selected by the source app.
+4. **Sync all output device volumes** matches the Lite default output or Pro virtual group volume to each Windows device's percentage. It does not multiply 50% twice. It also affects the volume of other apps using those physical devices.
+5. In Pro's **Speaker layout and routing**, choose stereo, swap left and right, mono, a single channel, or speaker positions. Dragging a marker switches to position routing. For 5.1/7.1, enable those channels in the Windows virtual group speaker configuration and in the source app.
+6. Place a built-in or USB microphone at the listening position and run **Auto calibration**. Recordings are not saved. Manual additional delay ranges from 0 to 2000 ms. Headset or Bluetooth call microphones may not be suitable for automatic measurement.
 
-창을 닫으면 트레이에서 계속 재생합니다. 트레이의 **종료**는 엔진도 종료합니다.
-설정에서 로그인 실행과 언어를 선택합니다. 한국어·영어·프랑스어·독일어·일본어를
-지원하며 지원하지 않는 시스템 언어는 영어로 시작합니다. Windows 테마와 강조색을
-사용합니다. 이름과 장치 식별자는 언어 변경으로 바뀌지 않습니다.
+Closing the window leaves playback running in the system tray. **Quit** in the tray also stops the engine. Choose launch-at-sign-in and the language in Settings. The app supports Korean, English, French, German, and Japanese; unsupported system languages start in English. The app follows the Windows theme and accent color. Names and device identifiers do not change when you switch languages.
 
-기존 설치는 등록된 경로에 업데이트합니다. 설치/제거 로그는 사용자 임시 폴더에
-생성됩니다. Windows 설치된 앱에서 제거할 수 있으며 그룹 설정은 재설치를 위해
-보관됩니다. Lite 설정은 `%LocalAppData%/OmniSound/lite-config.json`, Pro는
-`%ProgramData%/OmniSound/users`입니다. 두 에디션은 별도 폴더로 함께 둘 수 있습니다.
+Existing installations update in their registered location. Install and uninstall logs are created in the user's temporary folder. You can uninstall the app from Windows Installed apps; group settings are kept for reinstall. Lite settings are stored in `%LocalAppData%/OmniSound/lite-config.json`; Pro settings are in `%ProgramData%/OmniSound/users`. Lite and Pro can be installed side by side in separate folders.
 
-## 오디오 범위
+## Audio scope
 
-Pro 입력은 48kHz 스테레오/5.1/7.1 PCM16/24/32입니다. 내부에서는 48kHz float32로
-계산하고 실제 출력에는 스테레오 WASAPI 공유 스트림을 사용합니다. 일반 스테레오
-라우팅은 원본 좌우를 유지합니다. 다채널 입력은 스피커별 채널 선택, 위치 라우팅 또는
-헤드룸을 확보한 다운믹스로 처리합니다. 없는 채널을 생성하지 않으며 LFE는 명시적으로
-선택할 때만 전달합니다. RAW 출력을 요청하고 미지원 장치는 정상 모드로 돌아갑니다.
+Pro input supports 48 kHz stereo/5.1/7.1 PCM16/24/32. Audio is processed internally as 48 kHz float32, with stereo WASAPI shared-mode streams for physical outputs. Standard stereo routing preserves the source left and right channels. Multichannel input uses per-speaker channel selection, position routing, or a headroom-aware downmix. The app does not create missing channels, and forwards LFE only when explicitly selected. RAW output is requested; unsupported devices fall back to normal mode.
 
-**Windows 오디오 처리**는 장치의 정상 Windows 처리를 허용합니다. 위치 기능은 PCM
-배치이며 Dolby/Windows Sonic 동적 오브젝트 디코더나 자체 HRTF를 구현한 것은 아닙니다.
-Windows 공간 음향은 장치별 Windows 설정에서 관리합니다.
+**Windows audio processing** allows the device's normal Windows processing. Position features route PCM channels; they do not implement a Dolby/Windows Sonic dynamic-object decoder or their own HRTF. Configure Windows spatial sound separately for each device in Windows settings.
 
-128탭 보간과 IAudioClock/QPC로 독립 클럭 차이를 보정합니다. 새 Pro 그룹의 추가 버퍼는
-0ms이며 고정 200/400ms 대기를 넣지 않습니다. 기존 명시적 버퍼는 유지합니다. 실제
-장치·공유 모드·Bluetooth 버퍼 지연은 남습니다. Lite는 직접 재생되는 기본 출력을
-늦출 수 없어 복제 장치와 완전한 동기화를 보장하지 못합니다. Pro는 느린 출력에 맞춥니다.
+The app uses 128-tap interpolation and IAudioClock/QPC to compensate for independent device clocks. New Pro groups add 0 ms of buffering by default, without a fixed 200/400 ms wait. Existing explicit buffer settings are retained. Physical-device, shared-mode, and Bluetooth buffer latency remain. Lite cannot delay the directly played default output, so it cannot guarantee perfect synchronization with mirrored devices. Pro aligns playback to the slower output.
 
-**1ms는 지정한 위치에서 반복 측정하는 목표**입니다. 과거 실측과 현재 클럭 추정을
-구분합니다. 재연결, 형식/배치/지연 변경과 절전 복귀 후 재보정이 필요합니다. 실제 Pro
-설치, Bluetooth 조합, 장시간 음향 시험과 HLK는 아직 완료되지 않았습니다. ASIO/독점
-입력, 보호 콘텐츠, Wi-Fi 출력과 동시 원격 세션은 지원 범위 밖입니다.
+**1 ms is a target measured repeatedly at a specified position.** Historical measurements are distinguished from current clock estimates. Recalibration is needed after reconnecting devices, changing format/layout/delay, or resuming from sleep. Pro installation, Bluetooth combinations, long-duration audio testing, and HLK testing are not yet complete. ASIO/exclusive-mode input, protected content, Wi-Fi outputs, and simultaneous remote sessions are outside the supported scope.
 
-## 개발 빌드
+## Development build
 
-Visual Studio 2026 C++/CMake와 PowerShell 7을 사용합니다. 고정 버전 도구를
-`tools/cache`에 복원하며 시스템 보안 설정을 변경하지 않습니다.
+Use Visual Studio 2026 C++/CMake and PowerShell 7. The scripts restore pinned tool versions to `tools/cache` and do not change system security settings.
 
 ```powershell
 .\tools\Restore-WinUI.ps1
@@ -85,19 +51,19 @@ Visual Studio 2026 C++/CMake와 PowerShell 7을 사용합니다. 고정 버전 �
 .\tools\Build-Installer.ps1 -PackageDirectory 'C:\absolute\package-directory'
 ```
 
-`Package.ps1 -LiteOnly`는 드라이버를 포함하지 않아 WDK 빌드가 필요 없습니다.
-`OmniSoundSetup.exe`는 내부 설치/복구 도구이며 사용자용 설치 파일은 단일
-`OmniSound-Setup.exe`입니다. 무인 설치 인수는
-`/MODE=lite /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /LOG="C:\path\setup.log"`입니다.
+`Package.ps1 -LiteOnly` excludes the driver and does not require a WDK build. `OmniSoundSetup.exe` is an internal installation/recovery tool; the single user-facing installer is `OmniSound-Setup.exe`. Unattended installation arguments are:
+
+```text
+/MODE=lite /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /LOG="C:\path\setup.log"
+```
 
 | Build output | Purpose |
 | --- | --- |
-| `build/windows-x64/Release/OmniSound.exe` | Shared WinUI settings and tray |
+| `build/windows-x64/Release/OmniSound.exe` | Shared WinUI settings and system tray |
 | `OmniSoundEngine.exe` | User audio process |
 | `OmniSoundService.exe` | Pro privileged device/configuration service |
 | `OmniSoundProbe.exe` | Device/engine/digital diagnostics |
 | `OmniSoundSetup.exe` | Provisioning helper |
 | `build/driver/Release/OmniSoundAudio.sys` | Unsigned development driver |
 
-[Pro signing and release steps](docs/PRO_RELEASE.md), [validation](docs/VALIDATION.md),
-[architecture/quality](docs/ARCHITECTURE.md), [audio diagnostics](docs/AUDIO_QUALITY.md).
+[Pro signing and release steps](docs/PRO_RELEASE.md), [validation](docs/VALIDATION.md), [architecture and quality](docs/ARCHITECTURE.md), [audio diagnostics](docs/AUDIO_QUALITY.md).

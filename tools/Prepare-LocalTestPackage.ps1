@@ -41,7 +41,7 @@ Copy-Item -LiteralPath (Join-Path $binaries 'Microsoft.WindowsAppRuntime.Bootstr
 foreach ($name in $uiResources) { Copy-Item -LiteralPath (Join-Path $binaries $name) -Destination $destination }
 Copy-Item -LiteralPath $runtimeInstaller -Destination (Join-Path $destination 'prerequisites')
 foreach ($name in $driverNames) { Copy-Item -LiteralPath (Join-Path $driverSource $name) -Destination (Join-Path $destination 'driver') }
-foreach ($name in @('README.md','LICENSE','THIRD_PARTY_NOTICES.md')) { Copy-Item -LiteralPath (Join-Path $root $name) -Destination $destination }
+foreach ($name in @('README.md','README.ko.md','LICENSE','THIRD_PARTY_NOTICES.md')) { Copy-Item -LiteralPath (Join-Path $root $name) -Destination $destination }
 Copy-Item -LiteralPath (Join-Path $root 'tools\cache\nuget\microsoft.windowsappsdk.runtime\1.8.260804001\license.txt') -Destination (Join-Path $destination 'licenses\WindowsAppSDK-License.txt')
 Copy-Item -LiteralPath (Join-Path $root 'driver\sysvad\LICENSE') -Destination (Join-Path $destination 'licenses\SysVAD-MIT.txt')
 Copy-Item -LiteralPath (Join-Path $root 'third_party\nlohmann\LICENSE.MIT') -Destination (Join-Path $destination 'licenses\nlohmann-json-MIT.txt')
