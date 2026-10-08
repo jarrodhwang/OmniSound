@@ -1,0 +1,11 @@
+/build/
+/out/
+/.vs/
+/third_party/windows-driver-samples/
+*.user
+*.pdb
+*.log
+/dist/
+/tools/cache/
+/setup.inf
+/setup.rpt

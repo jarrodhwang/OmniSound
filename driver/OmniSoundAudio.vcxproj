@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64"><Configuration>Debug</Configuration><Platform>x64</Platform></ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64"><Configuration>Release</Configuration><Platform>x64</Platform></ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C281164D-1F21-46E0-929B-552273987902}</ProjectGuid>
+    <Configuration Condition="'$(Configuration)'==''">Release</Configuration>
+    <Platform Condition="'$(Platform)'==''">x64</Platform>
+    <WindowsTargetPlatformVersion>10.0.28000.0</WindowsTargetPlatformVersion>
+    <TargetVersion>Windows10</TargetVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props"/>
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>Driver</ConfigurationType><DriverType>KMDF</DriverType><DriverTargetPlatform>Universal</DriverTargetPlatform>
+    <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset><UseDebugLibraries>false</UseDebugLibraries>
+    <TargetName>OmniSoundAudio</TargetName><SignMode>Off</SignMode><KMDF_VERSION_MAJOR>1</KMDF_VERSION_MAJOR><KMDF_VERSION_MINOR>15</KMDF_VERSION_MINOR>
+    <OutDir>$(MSBuildThisFileDirectory)..\build\driver\$(Configuration)\</OutDir>
+    <IntDir>$(MSBuildThisFileDirectory)..\build\driver\obj\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props"/>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <LanguageStandard>stdcpp17</LanguageStandard><WarningLevel>Level4</WarningLevel><TreatWarningAsError>true</TreatWarningAsError>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)sysvad;$(ProjectDir)sysvad\EndpointsCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WIN32;UNICODE;_UNICODE;PC_IMPLEMENTATION;_USE_WAVERT_;_USE_IPortClsRuntimePower;_NEW_DELETE_OPERATORS_;DEBUG_LEVEL=DEBUGLVL_TERSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ExceptionHandling>false</ExceptionHandling><RuntimeTypeInfo>false</RuntimeTypeInfo><SpectreMitigation>Spectre</SpectreMitigation>
+    </ClCompile>
+    <Link><AdditionalDependencies>portcls.lib;stdunk.lib;libcntpr.lib;%(AdditionalDependencies)</AdditionalDependencies></Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="sysvad\adapter.cpp"/><ClCompile Include="sysvad\basetopo.cpp"/><ClCompile Include="sysvad\common.cpp"/>
+    <ClCompile Include="sysvad\hw.cpp"/><ClCompile Include="sysvad\kshelper.cpp"/><ClCompile Include="sysvad\savedata.cpp"/><ClCompile Include="sysvad\ToneGenerator.cpp"/>
+    <ClCompile Include="sysvad\EndpointsCommon\AudioModuleHelper.cpp"/><ClCompile Include="sysvad\EndpointsCommon\MiniportAudioEngineNode.cpp"/>
+    <ClCompile Include="sysvad\EndpointsCommon\MiniportStreamAudioEngineNode.cpp"/><ClCompile Include="sysvad\EndpointsCommon\mintopo.cpp"/>
+    <ClCompile Include="sysvad\EndpointsCommon\minwavert.cpp"/><ClCompile Include="sysvad\EndpointsCommon\minwavertstream.cpp"/>
+    <ClCompile Include="sysvad\EndpointsCommon\NewDelete.cpp"/>
+    <Inf Include="OmniSound.inf"/>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
+</Project>

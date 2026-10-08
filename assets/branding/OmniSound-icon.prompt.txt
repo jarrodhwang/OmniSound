@@ -1,0 +1,25 @@
+OmniSound icon
+Generated using the built-in image_gen tool with transparent_background=true.
+
+Initial generation prompt
+
+Use case: logo-brand.
+Asset type: OmniSound Windows desktop application icon, PNG with true transparent alpha, square 1024 by 1024 canvas.
+Primary request: Create a polished, distinctive app icon for OmniSound, a Windows app that synchronizes sound across multiple output devices.
+Scene/backdrop: Entire background genuinely transparent. All space around and inside the symbol remains transparent. No tile or background plate.
+Subject: A single bold circular audio emblem: a thick smooth open O-shaped ring suggesting sound spreading in all directions, framing five rounded vertical waveform bars. The bars form one balanced symmetric sound pulse, short at both ends and tallest in the center. Integrate the ring and waveform into one coherent, instantly recognizable compact silhouette.
+Style/medium: Contemporary Windows Fluent app icon aesthetic, precise clean geometry, softly rounded forms, restrained sculpted depth and subtle highlights within the emblem. Professional, simple, memorable.
+Composition/framing: Front-facing and centered, nearly square symbol occupying about 84 percent of the square canvas, equal safe transparent margins. Broad strokes and generous negative-space openings so it remains readable at 16, 24, 32, and 48 pixels.
+Color treatment: Windows-style blue accent with a gentle lighter blue highlight and richer blue edge shading. Strong enough contrast against both light and dark desktop backgrounds.
+Text: None.
+Constraints: One isolated finished icon only. Genuine transparent PNG alpha; no rendered checkerboard; no white or black backdrop; no rounded-square tile; no typography or letter labels; no watermark; no extra disconnected objects; no small decorative details; no floor, cast shadow, bloom, glow, mockup, grid, or multiple icon alternatives. Keep all lighting and depth inside the opaque symbol.
+
+Final cleanup prompt
+
+Use case: precise-object-edit.
+Edit target: The provided OmniSound app icon.
+Primary request: Clean this icon into a production-ready transparent PNG. Keep exactly the same blue circular ring and exactly the same five rounded waveform bars, their sizes, placement, blue gradients, and sculpted lighting.
+Change only: Remove every stray cyan or blue speckle, detached fleck, residual background fragment, and rough edge artifact. The circular hole and every gap between the bars must be perfectly clean, fully transparent negative space. The outer background must be fully transparent. Create pristine smooth antialiased silhouettes with no colored fringes.
+Output: One square PNG with real transparent alpha, clean isolated app emblem, equal transparent margins.
+Constraints: Preserve the existing icon design and color treatment. No extra shapes, no text, no badge, no background tile, no checkerboard pixels, no floor or cast shadow, no glow, no bloom, no stray pixels. Retain crisp contrast for small Windows icon sizes.
+

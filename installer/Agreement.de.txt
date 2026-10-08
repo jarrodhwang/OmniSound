@@ -1,0 +1,24 @@
+OmniSound — Lizenz und Datenschutz
+
+Die Rechte am eigenen Quellcode und an den Binärdateien von OmniSound bleiben beim
+Projektinhaber. Diese Kopie darf auf Ihrem eigenen Windows-Computer installiert
+und verwendet werden. Drittanbieterkomponenten behalten ihre Lizenzen im Ordner
+licenses. Diese Vereinbarung erlaubt keine Weiterverteilung der eigenen Software.
+
+Lite spiegelt eine Windows-Ausgabe ohne Audiotreiber. Pro installiert einen virtuellen
+Audiotreiber und einen Geräteverwaltungsdienst. Administratorrechte und ein geeignet
+signierter Treiber sind erforderlich. Setup deaktiviert keine Windows-Sicherheitsfunktionen.
+
+Audio wird lokal verarbeitet. Das Mikrofon wird nur während einer ausdrücklich
+gestarteten Kalibrierung verwendet; Aufnahmen werden nicht gespeichert. Einstellungen,
+Gerätekennungen, Diagnosezähler und Setup-Protokolle können lokal gespeichert werden.
+Die Deinstallation bewahrt die Audioeinstellungen für eine spätere Neuinstallation.
+
+Latenz und Synchronisation hängen von Windows, Gerätepuffern, Verbindung und Hörposition
+ab. Null Latenz und perfekte Synchronisation unter allen Bedingungen werden nicht
+versprochen. Die Positionierung ordnet PCM-Kanäle zu; räumliche Audioformate von
+Drittanbietern bleiben separate Produkte.
+
+Entwicklungsbuilds haben noch nicht alle Geräte-, Zertifizierungs- und Freigabetests
+abgeschlossen. Prüfen Sie anhand der Status- und Messwerte, ob Ihre Gerätekonfiguration
+die Anforderungen erfüllt.

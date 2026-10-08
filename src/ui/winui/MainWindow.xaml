@@ -1,0 +1,105 @@
+<Window x:Class="OmniSound.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Grid x:Name="RootPanel" RequestedTheme="Default" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid.Resources>
+      <DataTemplate x:Key="DeviceRowTemplate">
+        <Grid ColumnSpacing="12">
+          <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+          <CheckBox x:Name="MembershipCheck" MinWidth="24" Padding="0" VerticalAlignment="Center"/>
+          <FontIcon x:Name="DeviceGlyph" Grid.Column="1" FontSize="20" VerticalAlignment="Center"/>
+          <StackPanel Grid.Column="2" Spacing="4">
+            <TextBlock x:Name="DeviceName" FontSize="14" TextWrapping="Wrap"/>
+            <TextBlock x:Name="DefaultBadge" Text="Windows 기본 출력" FontSize="12" FontWeight="Medium" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" Visibility="Collapsed"/>
+            <TextBlock x:Name="DeviceMetadata" FontSize="12" TextWrapping="Wrap" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Visibility="Collapsed"/>
+          </StackPanel>
+        </Grid>
+      </DataTemplate>
+      <Style TargetType="TextBlock"><Setter Property="FontFamily" Value="Malgun Gothic" /></Style>
+      <Style TargetType="Button"><Setter Property="CornerRadius" Value="8" /></Style>
+    </Grid.Resources>
+    <Grid.RowDefinitions><RowDefinition Height="48"/><RowDefinition Height="*"/><RowDefinition Height="52"/></Grid.RowDefinitions>
+    <Grid x:Name="TitleBarPanel" Padding="20,0,144,0" Background="{ThemeResource LayerFillColorDefaultBrush}" ColumnSpacing="10">
+      <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+      <FontIcon Glyph="&#xE767;" FontSize="19" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center"/>
+      <TextBlock x:Name="ProductTitleText" Grid.Column="1" Text="OmniSound" FontSize="14" FontWeight="Medium" VerticalAlignment="Center" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+      <TextBlock x:Name="ModeBadgeText" Grid.Column="2" Text="LITE" FontSize="10" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center"/>
+    </Grid>
+    <Grid Grid.Row="1">
+      <Grid.ColumnDefinitions><ColumnDefinition Width="216"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+      <Border Background="{ThemeResource LayerFillColorDefaultBrush}" BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}" BorderThickness="0,0,1,0" Padding="12,22,12,16">
+        <Grid RowSpacing="16">
+          <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+          <Grid Margin="8,0,0,0"><TextBlock Text="그룹" FontSize="13" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center"/>
+            <Button x:Name="AddGroupButton" HorizontalAlignment="Right" Click="AddGroup_Click" Padding="8" Background="Transparent" BorderThickness="0" ToolTipService.ToolTip="그룹 추가" AutomationProperties.Name="그룹 추가"><FontIcon Glyph="&#xE710;" FontSize="15"/></Button>
+          </Grid>
+          <ListView x:Name="GroupsList" Grid.Row="1" SelectionMode="Single" SelectionChanged="GroupsList_SelectionChanged" AutomationProperties.Name="출력 그룹"/>
+          <Button x:Name="RemoveGroupButton" Grid.Row="2" Click="RemoveGroup_Click" Background="Transparent" BorderThickness="0" HorizontalAlignment="Left" ToolTipService.ToolTip="선택 그룹 삭제"><StackPanel Orientation="Horizontal" Spacing="8"><FontIcon Glyph="&#xE74D;" FontSize="13"/><TextBlock Text="그룹 삭제" FontSize="12"/></StackPanel></Button>
+        </Grid>
+      </Border>
+      <ScrollViewer x:Name="WorkspaceScroll" Grid.Column="1" VerticalScrollBarVisibility="Auto">
+        <StackPanel Padding="28,24" Spacing="20">
+          <Grid ColumnSpacing="12"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+            <TextBox x:Name="GroupNameBox" PlaceholderText="그룹 이름" MaxLength="64" FontFamily="Malgun Gothic" FontSize="22" FontWeight="Medium" Background="Transparent" BorderThickness="0" Padding="0,4" TextChanged="GroupName_TextChanged" AutomationProperties.Name="그룹 이름" ToolTipService.ToolTip="그룹 이름 변경"/>
+            <Button x:Name="RefreshButton" Grid.Column="1" Click="Refresh_Click" Padding="10" VerticalAlignment="Center" Background="Transparent" BorderThickness="0" ToolTipService.ToolTip="장치 새로 고침" AutomationProperties.Name="새로 고침"><FontIcon Glyph="&#xE72C;" FontSize="16"/></Button>
+            <Button Grid.Column="2" Padding="10" VerticalAlignment="Center" Background="Transparent" BorderThickness="0" ToolTipService.ToolTip="설정" AutomationProperties.Name="설정"><FontIcon Glyph="&#xE713;" FontSize="17"/>
+              <Button.Flyout><Flyout><StackPanel Spacing="18" MinWidth="250"><TextBlock Text="설정" FontSize="18" FontWeight="Medium"/>
+                <ComboBox x:Name="LanguagePicker" Header="Language" HorizontalAlignment="Stretch" AutomationProperties.Name="Language"/>
+                <ToggleSwitch x:Name="StartupToggle" Header="Windows 로그인 시 실행" Toggled="Startup_Toggled"/>
+                <TextBlock Text="창을 닫아도 트레이에서 계속 실행됩니다." FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap"/>
+                <Button x:Name="WindowsSoundButton" Content="Windows 소리 설정" Click="WindowsSound_Click"/>
+                <Button x:Name="ExitButton" Content="OmniSound 종료" Click="Exit_Click"/>
+              </StackPanel></Flyout></Button.Flyout>
+            </Button>
+          </Grid>
+          <Border CornerRadius="8" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Padding="16"><StackPanel Spacing="12">
+            <TextBlock x:Name="DeviceSectionText" Text="출력 장치" FontSize="14" FontWeight="Medium"/>
+            <ListView x:Name="DevicesList" MinHeight="100" MaxHeight="320" HorizontalContentAlignment="Stretch" SelectionMode="Single" SelectionChanged="DevicesList_SelectionChanged" AutomationProperties.Name="그룹 출력 기기"/>
+            <Button x:Name="MoreDevicesButton" Content="장치 더보기" Click="MoreDevices_Click" Visibility="Collapsed" Background="Transparent" BorderThickness="0" FontSize="12" Padding="4" AutomationProperties.Name="사용 불가 장치 표시 전환"/>
+          </StackPanel></Border>
+          <Border CornerRadius="8" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Padding="18"><StackPanel Spacing="16">
+            <CheckBox x:Name="AllFollowVolumeCheck" Content="모든 출력 장치 볼륨 동기화" IsThreeState="True" Checked="AllFollowVolume_Click" Unchecked="AllFollowVolume_Click" Indeterminate="AllFollowVolume_Click" FontSize="14" ToolTipService.ToolTip="이 그룹에 선택한 추가 출력 장치들을 Windows 기본 출력과 같은 퍼센트로 설정합니다. 체크 후 저장하세요."/>
+            <Border Height="1" Background="{ThemeResource DividerStrokeColorDefaultBrush}"/>
+            <Grid ColumnSpacing="16"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions><TextBlock x:Name="SelectedDeviceText" Text="장치를 선택하세요" FontSize="14" FontWeight="Medium" TextWrapping="Wrap" VerticalAlignment="Center"/><Button x:Name="IdentifyButton" Grid.Column="1" Content="확인음" Click="Identify_Click" Padding="10,5" FontSize="12" VerticalAlignment="Top"/></Grid>
+            <TextBlock x:Name="SelectedDeviceHintText" Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="12" TextWrapping="Wrap" Visibility="Collapsed"/>
+            <Grid ColumnSpacing="26"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="180"/></Grid.ColumnDefinitions>
+              <StackPanel Spacing="8"><Grid><TextBlock Text="Windows 볼륨" Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="12"/><TextBlock x:Name="GainValueText" Text="100%" HorizontalAlignment="Right" FontSize="12" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/></Grid>
+                <Slider x:Name="MemberGainSlider" Minimum="0" Maximum="100" Value="100" StepFrequency="1" AutomationProperties.Name="선택 기기 Windows 볼륨 (%)" ToolTipService.ToolTip="해당 Windows 장치의 볼륨을 변경합니다. 다른 앱에도 적용됩니다."/>
+              </StackPanel>
+              <NumberBox x:Name="MemberDelayBox" Grid.Column="1" Header="추가 지연 (ms)" Minimum="0" Maximum="2000" SmallChange="1" Value="0" SpinButtonPlacementMode="Inline" AutomationProperties.Name="수동 지연 (ms)" ToolTipService.ToolTip="0은 별도 대기 없음입니다. 장치와 오디오 버퍼의 지연은 남습니다."/>
+            </Grid>
+            <CheckBox x:Name="FollowVolumeCheck" Content="기본 출력과 볼륨 동기화" FontSize="12" ToolTipService.ToolTip="기본 출력 50%일 때 추가 출력도 50%로 설정합니다. 볼륨 비율을 다시 곱하지 않습니다."/>
+          </StackPanel></Border>
+          <Expander x:Name="ProPanel" Header="Speaker layout and routing" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Visibility="Collapsed"><StackPanel Spacing="16">
+            <Grid ColumnSpacing="16"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+              <ComboBox x:Name="ProcessingPicker" Header="Output processing" HorizontalAlignment="Stretch"/>
+              <NumberBox x:Name="SafetyBufferBox" Grid.Column="1" Header="Buffer reserve (ms)" Minimum="0" Maximum="1000" SmallChange="1" Value="0" SpinButtonPlacementMode="Inline"/>
+            </Grid>
+            <TextBlock x:Name="QualityStatusText" TextWrapping="Wrap" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+            <ToggleSwitch x:Name="LiveControlsToggle" Header="Apply controls live" IsOn="True"/>
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8">
+              <Canvas x:Name="SpeakerCanvas" Height="220" MinWidth="260" HorizontalAlignment="Stretch" AutomationProperties.Name="Speaker layout"/>
+            </Border>
+            <ComboBox x:Name="RoutingPicker" Header="Selected speaker routing" HorizontalAlignment="Stretch"/>
+            <Grid ColumnSpacing="16"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+              <NumberBox x:Name="AzimuthBox" Header="Angle (degrees)" Minimum="-180" Maximum="180" SmallChange="5" Value="0" SpinButtonPlacementMode="Inline"/>
+              <NumberBox x:Name="DistanceBox" Grid.Column="1" Header="Distance (m)" Minimum="0.2" Maximum="20" SmallChange="0.1" Value="1" SpinButtonPlacementMode="Inline"/>
+            </Grid>
+            <StackPanel Orientation="Horizontal" Spacing="10"><Button x:Name="ApplyLiveButton" Content="Apply now" Click="ApplyLive_Click"/><Button x:Name="ConfigureSpeakersButton" Content="Windows speaker configuration" Click="ConfigureSpeakers_Click"/></StackPanel>
+            <TextBlock Text="Position routes PCM to physical speakers. Windows spatial formats are configured per endpoint." FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap"/>
+          </StackPanel></Expander>
+          <Expander Header="동기화 보정" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"><StackPanel Spacing="14">
+            <TextBlock x:Name="CalibrationStatusText" Text="보정 전" TextWrapping="Wrap" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" AutomationProperties.LiveSetting="Polite"/>
+            <ComboBox x:Name="MicrophonePicker" Header="측정 마이크" HorizontalAlignment="Stretch" AutomationProperties.Name="측정 마이크"/>
+            <StackPanel Orientation="Horizontal" Spacing="10"><Button x:Name="CalibrateButton" Content="자동 보정" Click="Calibrate_Click"/><Button x:Name="CancelCalibrationButton" Content="취소" Click="CancelCalibration_Click" IsEnabled="False"/></StackPanel>
+          </StackPanel></Expander>
+        </StackPanel>
+      </ScrollViewer>
+    </Grid>
+    <Border Grid.Row="2" Background="{ThemeResource LayerFillColorDefaultBrush}" BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}" BorderThickness="0,1,0,0" Padding="20,8">
+      <Grid ColumnSpacing="12"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center"><Ellipse x:Name="StatusDot" Width="6" Height="6" Fill="{ThemeResource AccentTextFillColorPrimaryBrush}"/><TextBlock x:Name="StatusText" Text="연결 중" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" AutomationProperties.LiveSetting="Polite"/></StackPanel>
+        <TextBlock x:Name="UnsavedText" Grid.Column="1" Text="저장되지 않은 변경" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" Visibility="Collapsed"/>
+        <Button x:Name="SaveButton" Grid.Column="2" Content="저장" Click="Save_Click" Style="{StaticResource AccentButtonStyle}" Padding="22,5"/>
+      </Grid>
+    </Border>
+  </Grid>
+</Window>

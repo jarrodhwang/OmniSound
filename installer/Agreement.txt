@@ -1,0 +1,25 @@
+OmniSound — Software License and Privacy
+
+OmniSound original source and binaries are reserved to the project owner. This
+copy may be installed and used on your own Windows computer. Third-party
+components retain their respective licenses, included in the licenses folder.
+This agreement does not grant a license to redistribute the original software.
+
+OmniSound Lite mirrors a Windows output without installing an audio driver.
+OmniSound Pro installs a virtual audio driver and a device management service.
+Pro installation requires administrator access and an appropriately signed
+driver package. Setup does not disable Windows security features.
+
+Audio is processed locally. The microphone is used only during an explicitly
+started calibration, and calibration does not save recording files. Settings,
+device identifiers, diagnostic counters and setup logs may be stored locally.
+Uninstall retains audio settings so they can be reused after reinstallation.
+
+Playback latency and synchronization depend on Windows, device buffers,
+transport and the listening position. Zero latency and universally exact
+synchronization are not promised. Stereo positioning is a PCM speaker mapping
+feature; licensed third-party spatial audio formats remain separate products.
+
+Development builds have not completed all device, certification or release
+validation. Use the supplied status and measurement information to determine
+whether a particular device arrangement meets your requirements.

@@ -1,0 +1,24 @@
+OmniSound — Licence et confidentialité
+
+Les droits sur le code et les binaires originaux d’OmniSound sont réservés au
+propriétaire du projet. Cette copie peut être installée et utilisée sur votre
+ordinateur Windows personnel. Les composants tiers conservent leurs licences,
+incluses dans le dossier licenses. Cet accord ne donne aucun droit de redistribution.
+
+Lite copie une sortie Windows sans pilote audio. Pro installe un pilote audio
+virtuel et un service de gestion des appareils ; des droits administrateur et un
+pilote correctement signé sont requis. La configuration ne désactive pas la sécurité Windows.
+
+Le son est traité localement. Le microphone n’est utilisé que pendant un calibrage
+lancé explicitement ; aucun fichier d’enregistrement n’est conservé. Paramètres,
+identifiants, compteurs de diagnostic et journaux peuvent être stockés localement.
+La désinstallation conserve les paramètres audio pour une réinstallation.
+
+La latence et la synchronisation dépendent de Windows, des tampons, de la connexion
+et de la position d’écoute. Une latence nulle et une synchronisation parfaite dans
+toutes les conditions ne sont pas promises. Le placement est un routage PCM ; les
+formats audio spatiaux tiers restent des produits distincts.
+
+Les versions de développement n’ont pas terminé toutes les validations matérielles,
+de certification ou de publication. Consultez les états et mesures fournis pour
+vérifier si votre configuration répond à vos besoins.

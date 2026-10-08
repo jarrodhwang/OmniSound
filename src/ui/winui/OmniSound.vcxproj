@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64"><Configuration>Debug</Configuration><Platform>x64</Platform></ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64"><Configuration>Release</Configuration><Platform>x64</Platform></ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{5B6F7243-C853-4C43-A201-8C0D39DF8E50}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>OmniSound</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+    <TargetPlatformVersion>10.0.26100.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.26100.0</TargetPlatformMinVersion>
+    <WindowsSdkPath>C:\Program Files (x86)\Windows Kits\10\</WindowsSdkPath>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType><UseDebugLibraries>true</UseDebugLibraries><PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType><UseDebugLibraries>false</UseDebugLibraries><PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(ProjectDir)..\..\..\build\windows-x64\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)..\..\..\build\winui\obj\$(Configuration)\</IntDir>
+    <GeneratedFilesDir>$(IntDir)Generated Files\</GeneratedFilesDir>
+    <XamlGeneratedOutputPath>$(GeneratedFilesDir)</XamlGeneratedOutputPath>
+    <WindowsAppSDKPackageVersion>1.8.260804001</WindowsAppSDKPackageVersion>
+    <WindowsAppSDKWinUIVersion>1.8.260803003</WindowsAppSDKWinUIVersion>
+    <UseWinUI>true</UseWinUI>
+    <XamlLanguage>CppWinRT</XamlLanguage>
+    <CppWinRTRootNamespaceAutoMerge>true</CppWinRTRootNamespaceAutoMerge>
+    <CppWinRTOptimized>false</CppWinRTOptimized>
+    <WindowsPackageType>None</WindowsPackageType>
+    <WindowsAppSDKSelfContained>false</WindowsAppSDKSelfContained>
+    <WindowsAppSdkBootstrapInitialize>false</WindowsAppSdkBootstrapInitialize>
+    <WindowsAppSDKVerifyTransitiveDependencies>false</WindowsAppSDKVerifyTransitiveDependencies>
+    <ManagedAssembly>false</ManagedAssembly>
+    <EnableDefaultApplicationDefinition>false</EnableDefaultApplicationDefinition>
+    <EnableDefaultPageItems>false</EnableDefaultPageItems>
+    <AppxPackage>false</AppxPackage>
+    <AppxBundle>Never</AppxBundle>
+    <GenerateAppxPackageOnBuild>false</GenerateAppxPackageOnBuild>
+  </PropertyGroup>
+  <Import Project="$(NuGetPackageRoot)microsoft.windowsappsdk.winui\$(WindowsAppSDKWinUIVersion)\build\native\Microsoft.WindowsAppSDK.WinUI.props"
+          Condition="Exists('$(NuGetPackageRoot)microsoft.windowsappsdk.winui\$(WindowsAppSDKWinUIVersion)\build\native\Microsoft.WindowsAppSDK.WinUI.props')" />
+  <Import Project="$(NuGetPackageRoot)microsoft.windowsappsdk.foundation\1.8.260803002\buildTransitive\native\Microsoft.WindowsAppSDK.Foundation.props"
+          Condition="Exists('$(NuGetPackageRoot)microsoft.windowsappsdk.foundation\1.8.260803002\buildTransitive\native\Microsoft.WindowsAppSDK.Foundation.props')" />
+  <Import Project="$(NuGetPackageRoot)microsoft.windowsappsdk.runtime\$(WindowsAppSDKPackageVersion)\buildTransitive\native\Microsoft.WindowsAppSDK.Runtime.props"
+          Condition="Exists('$(NuGetPackageRoot)microsoft.windowsappsdk.runtime\$(WindowsAppSDKPackageVersion)\buildTransitive\native\Microsoft.WindowsAppSDK.Runtime.props')" />
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(NuGetPackageRoot)microsoft.windows.cppwinrt\2.0.250303.1\build\native\Microsoft.Windows.CppWinRT.props"
+          Condition="Exists('$(NuGetPackageRoot)microsoft.windows.cppwinrt\2.0.250303.1\build\native\Microsoft.Windows.CppWinRT.props')" />
+  <ItemGroup>
+    <Reference Include="$(WindowsSDK_MetadataFoundationPath)\Windows.Foundation.FoundationContract.winmd">
+      <WinMDFile>true</WinMDFile>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="$(WindowsSDK_MetadataPathVersioned)\Windows.Foundation.UniversalApiContract\**\Windows.Foundation.UniversalApiContract.winmd">
+      <WinMDFile>true</WinMDFile>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Microsoft.UI.Xaml"><HintPath>$(ProjectDir)..\..\..\tools\cache\nuget\microsoft.windowsappsdk.winui\1.8.260803003\metadata\Microsoft.UI.Xaml.winmd</HintPath><WinMDFile>true</WinMDFile></Reference>
+    <Reference Include="Microsoft.UI.Text"><HintPath>$(ProjectDir)..\..\..\tools\cache\nuget\microsoft.windowsappsdk.winui\1.8.260803003\metadata\Microsoft.UI.Text.winmd</HintPath><WinMDFile>true</WinMDFile></Reference>
+    <Reference Include="Microsoft.Windows.Foundation"><HintPath>$(ProjectDir)..\..\..\tools\cache\nuget\microsoft.windowsappsdk.foundation\1.8.260803002\metadata\Microsoft.Windows.Foundation.winmd</HintPath><WinMDFile>true</WinMDFile></Reference>
+    <Reference Include="Microsoft.Windows.ApplicationModel.Resources"><HintPath>$(ProjectDir)..\..\..\tools\cache\nuget\microsoft.windowsappsdk.foundation\1.8.260803002\metadata\Microsoft.Windows.ApplicationModel.Resources.winmd</HintPath><WinMDFile>true</WinMDFile></Reference>
+    <Reference Include="Microsoft.Foundation"><HintPath>$(ProjectDir)..\..\..\tools\cache\nuget\microsoft.windowsappsdk.interactiveexperiences\1.8.260708001\metadata\10.0.18362.0\Microsoft.Foundation.winmd</HintPath><WinMDFile>true</WinMDFile></Reference>
+    <Reference Include="Microsoft.Graphics"><HintPath>$(ProjectDir)..\..\..\tools\cache\nuget\microsoft.windowsappsdk.interactiveexperiences\1.8.260708001\metadata\10.0.18362.0\Microsoft.Graphics.winmd</HintPath><WinMDFile>true</WinMDFile></Reference>
+    <Reference Include="Microsoft.UI"><HintPath>$(ProjectDir)..\..\..\tools\cache\nuget\microsoft.windowsappsdk.interactiveexperiences\1.8.260708001\metadata\10.0.18362.0\Microsoft.UI.winmd</HintPath><WinMDFile>true</WinMDFile></Reference>
+    <Reference Include="Microsoft.Web.WebView2.Core"><HintPath>$(ProjectDir)..\..\..\tools\cache\nuget\microsoft.web.webview2\1.0.3179.45\lib\Microsoft.Web.WebView2.Core.winmd</HintPath><WinMDFile>true</WinMDFile></Reference>
+  </ItemGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader><PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard><WarningLevel>Level4</WarningLevel><TreatWarningAsError>true</TreatWarningAsError>
+      <DisableSpecificWarnings>4002;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <PreprocessorDefinitions>UNICODE;_UNICODE;WIN32_LEAN_AND_MEAN;NOMINMAX;DISABLE_XAML_GENERATED_MAIN;_WIN32_WINNT=0x0A00;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(GeneratedFilesDir);$(IntDir);$(ProjectDir);$(ProjectDir)..\..\..\include;$(ProjectDir)..\..\..\third_party;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary Condition="'$(Configuration)'=='Debug'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)'=='Release'">MultiThreaded</RuntimeLibrary>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\build\windows-x64\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>omni_win.lib;omni_core.lib;ole32.lib;uuid.lib;avrt.lib;propsys.lib;advapi32.lib;shell32.lib;cfgmgr32.lib;swdevice.lib;windowsapp.lib;comctl32.lib;gdi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <Page><SubType>Designer</SubType></Page>
+    <ApplicationDefinition><SubType>Designer</SubType></ApplicationDefinition>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator><XamlRuntime>WinUI</XamlRuntime>
+    </ApplicationDefinition>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator><XamlRuntime>WinUI</XamlRuntime>
+    </Page>
+    <ClCompile Include="App.xaml.cpp" />
+    <ClCompile Include="MainWindow.xaml.cpp" />
+    <ClCompile Include="desktop.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="pch.cpp"><PrecompiledHeader>Create</PrecompiledHeader></ClCompile>
+    <ClCompile Include="..\controller.cpp" />
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="$(GeneratedFilesDir)XamlMetaDataProvider.cpp" />
+    <ClCompile Include="$(GeneratedFilesDir)XamlTypeInfo.g.cpp" />
+    <ClCompile Include="$(GeneratedFilesDir)XamlTypeInfo.Impl.g.cpp" />
+    <ClCompile Include="$(GeneratedFilesDir)XamlLibMetadataProvider.g.cpp" />
+    <ClInclude Include="App.xaml.h" />
+    <ClInclude Include="MainWindow.xaml.h" />
+    <ClInclude Include="..\controller.hpp" />
+    <Manifest Include="OmniSound.manifest" />
+    <ResourceCompile Include="..\..\win\version.rc" />
+    <None Include="packages.config" />
+    <Midl Include="Project.idl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <Import Project="$(NuGetPackageRoot)microsoft.windows.cppwinrt\2.0.250303.1\build\native\Microsoft.Windows.CppWinRT.targets"
+          Condition="Exists('$(NuGetPackageRoot)microsoft.windows.cppwinrt\2.0.250303.1\build\native\Microsoft.Windows.CppWinRT.targets')" />
+  <Import Project="$(NuGetPackageRoot)microsoft.windowsappsdk.winui\$(WindowsAppSDKWinUIVersion)\build\native\Microsoft.WindowsAppSDK.WinUI.targets"
+          Condition="Exists('$(NuGetPackageRoot)microsoft.windowsappsdk.winui\$(WindowsAppSDKWinUIVersion)\build\native\Microsoft.WindowsAppSDK.WinUI.targets')" />
+  <Import Project="$(NuGetPackageRoot)microsoft.windowsappsdk\$(WindowsAppSDKPackageVersion)\build\native\Microsoft.WindowsAppSDK.targets"
+          Condition="Exists('$(NuGetPackageRoot)microsoft.windowsappsdk\$(WindowsAppSDKPackageVersion)\build\native\Microsoft.WindowsAppSDK.targets')" />
+  <PropertyGroup>
+    <MarkupCompilePass1DependsOn>ComputeReferenceCLInput;$(MarkupCompilePass1DependsOn)</MarkupCompilePass1DependsOn>
+    <BeforeClCompileTargets>$(BeforeClCompileTargets);CompileWinUiXaml</BeforeClCompileTargets>
+  </PropertyGroup>
+  <Target Name="CompileWinUiXaml" DependsOnTargets="MarkupCompilePass1;MarkupCompilePass2" />
+  <Target Name="RequireWinUiPackages" BeforeTargets="PrepareForBuild">
+    <Error Condition="!Exists('$(NuGetPackageRoot)microsoft.windowsappsdk\$(WindowsAppSDKPackageVersion)\build\native\Microsoft.WindowsAppSDK.targets')"
+           Text="Restore the pinned WinUI packages with tools\Restore-WinUI.ps1." />
+    <Error Condition="!Exists('$(NuGetPackageRoot)microsoft.windowsappsdk.winui\$(WindowsAppSDKWinUIVersion)\build\native\Microsoft.WindowsAppSDK.WinUI.targets')"
+           Text="Restore the pinned WinUI packages with tools\Restore-WinUI.ps1." />
+  </Target>
+</Project>

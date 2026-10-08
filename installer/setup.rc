@@ -1,0 +1,4 @@
+#include <windows.h>
+#include "../src/win/version.rc"
+1 RT_MANIFEST "setup.manifest"
+101 RCDATA "Install.ps1"
