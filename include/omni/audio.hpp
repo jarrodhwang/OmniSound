@@ -23,6 +23,8 @@ std::string default_render_endpoint();
 ComPtr<IMMDevice> get_device(const std::string &);
 float endpoint_volume(const std::string &);
 void set_endpoint_volume(const std::string &, float);
+bool endpoint_muted(const std::string &);
+void set_endpoint_mute(const std::string &, bool);
 Frame loopback_unity_gain(const std::string &, bool master_only = false);
 class VolumeWatcher final : public IAudioEndpointVolumeCallback
 {

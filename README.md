@@ -18,7 +18,7 @@ C++20 · WinUI 3 · Multi-output audio for Windows 11 x64.
 1. Run `OmniSound-Setup.exe` → choose Lite → accept the license → choose an install location → install. Pro is disabled in the standard development installer until a signed release is ready.
 2. Add a group, check the box to the left of each output device, and save. Clicking a row or name only selects its settings. Find unavailable devices under **Show more devices**.
 3. Lite keeps Windows' default output. With Pro, select a virtual group in Windows sound settings or an app's output settings. Audio plays through the group selected by the source app.
-4. **Sync all output device volumes** matches the Lite default output or Pro virtual group volume to each Windows device's percentage. It does not multiply 50% twice. It also affects the volume of other apps using those physical devices.
+4. **Sync all output device volumes** matches the Lite default output or Pro virtual group volume to each Windows device's percentage. It does not multiply 50% twice. It also affects the volume of other apps using those physical devices. The same applies to mute: when the reference is muted, the matched devices are muted too, and they are unmuted when it is unmuted.
 5. In Pro's **Speaker layout and routing**, choose stereo, swap left and right, mono, a single channel, or speaker positions. Dragging a marker switches to position routing. For 5.1/7.1, enable those channels in the Windows virtual group speaker configuration and in the source app.
 6. Place a built-in or USB microphone at the listening position and run **Auto calibration**. Recordings are not saved. Manual additional delay ranges from 0 to 2000 ms. Headset or Bluetooth call microphones may not be suitable for automatic measurement.
 

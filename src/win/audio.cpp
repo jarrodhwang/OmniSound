@@ -43,6 +43,25 @@ void set_endpoint_volume(const std::string &id, float scalar)
         check(volume->SetMasterVolumeLevelScalar(std::clamp(scalar, 0.f, 1.f), nullptr),
               "Set Windows device volume");
 }
+bool endpoint_muted(const std::string &id)
+{
+    ComPtr<IAudioEndpointVolume> volume;
+    check(get_device(id)->Activate(__uuidof(IAudioEndpointVolume), CLSCTX_ALL, nullptr, &volume),
+          "Open Windows device volume");
+    BOOL mute{};
+    check(volume->GetMute(&mute), "Read Windows device mute");
+    return mute != FALSE;
+}
+void set_endpoint_mute(const std::string &id, bool muted)
+{
+    ComPtr<IAudioEndpointVolume> volume;
+    check(get_device(id)->Activate(__uuidof(IAudioEndpointVolume), CLSCTX_ALL, nullptr, &volume),
+          "Open Windows device volume");
+    BOOL current{};
+    check(volume->GetMute(&current), "Read Windows device mute");
+    if ((current != FALSE) != muted)
+        check(volume->SetMute(muted ? TRUE : FALSE, nullptr), "Set Windows device mute");
+}
 Frame loopback_unity_gain(const std::string &id, bool master_only)
 {
     ComPtr<IAudioEndpointVolume> volume;

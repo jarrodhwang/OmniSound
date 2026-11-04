@@ -404,10 +404,16 @@ int wmain(int argc, wchar_t **argv)
                                 device_changed)
                                 try
                                 {
-                                    const auto level = member.follow_reference_volume
-                                                           ? endpoint_volume(route_sources.at(g.id))
-                                                           : static_cast<float>(member.gain);
-                                    set_endpoint_volume(member.endpoint_id, level);
+                                    if (member.follow_reference_volume)
+                                    {
+                                        // Follow the reference's mute as well as its volume. Otherwise a muted
+                                        // member stays silent while the reference keeps playing.
+                                        const auto reference = route_sources.at(g.id);
+                                        set_endpoint_volume(member.endpoint_id, endpoint_volume(reference));
+                                        set_endpoint_mute(member.endpoint_id, endpoint_muted(reference));
+                                    }
+                                    else
+                                        set_endpoint_volume(member.endpoint_id, static_cast<float>(member.gain));
                                     volume_applied[key] = signature;
                                 }
                                 catch (const std::exception &e)
